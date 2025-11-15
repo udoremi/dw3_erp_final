@@ -3,9 +3,9 @@
 POST http://localhost:40000/Login HTTP/1.1
 content-type: application/json
 
-{    
-    "username": "admin",
-    "password": "admin"
+{
+    "username": "qwe",
+    "password": "qwe"
 }
 ### Seta o token
 @accessToken = {{loginAutenticado.response.body.$.token}}
@@ -15,10 +15,10 @@ POST http://localhost:40000/insertUsuario HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{accessToken}}
 
-{    
-    "username": "tecnico1",
-    "password": "mudar123",
-    "is_tecnico": true,
+{
+    "username": "tecnico1",
+    "password": "mudar123",
+    "is_tecnico": true,
     "deleted": false
 }
 
@@ -27,10 +27,10 @@ POST http://localhost:40000/insertUsuario HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{accessToken}}
 
-{    
-    "username": "user1",
-    "password": "mudar123",
-    "is_tecnico": false,
+{
+    "username": "user1",
+    "password": "mudar123",
+    "is_tecnico": false,
     "deleted": false
 }
 
@@ -45,8 +45,8 @@ POST http://localhost:40000/getUsuarioByID HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{accessToken}}
 
-{    
-    "usuarioid": 1
+{
+    "usuarioid": 1
 }
 
 ### Teste de atualização de usuario
@@ -54,11 +54,11 @@ POST http://localhost:40000/updateUsuario HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{accessToken}}
 
-{    
-    "usuarioid": 1,
-    "username": "admin_novo",
-    "is_tecnico": true,
-    "deleted": false
+{
+    "usuarioid": 1,
+    "username": "admin_novo",
+    "is_tecnico": true,
+    "deleted": false
 }
 
 ### Teste de delete (soft) de usuario
@@ -66,6 +66,6 @@ POST http://localhost:40000/deleteUsuario HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{accessToken}}
 
-{    
-    "usuarioid": 3
+{
+    "usuarioid": 3
 }

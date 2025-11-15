@@ -3,10 +3,11 @@
 POST http://localhost:40000/Login HTTP/1.1
 content-type: application/json
 
-{    
-    "username": "user1",
-    "password": "mudar123"
+{
+    "username": "user1",
+    "password": "mudar123"
 }
+### Seta o token
 @userToken = {{loginUser.response.body.$.token}}
 
 ### Teste de inserção de chamado (logado como user1)
@@ -14,8 +15,8 @@ POST http://localhost:40000/insertChamado HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{userToken}}
 
-{    
-    "titulo": "Impressora não funciona",
+{
+    "titulo": "Impressora não funciona",
     "descricao": "A impressora do financeiro está offline.",
     "categoria": "Hardware"
 }
@@ -25,8 +26,8 @@ POST http://localhost:40000/insertChamado HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{userToken}}
 
-{    
-    "titulo": "Sistema Lento",
+{
+    "titulo": "Sistema Lento",
     "descricao": "O sistema de ERP está muito lento hoje.",
     "categoria": "Software",
     "prioridade": "Alta"
@@ -43,10 +44,11 @@ Authorization: Bearer {{userToken}}
 POST http://localhost:40000/Login HTTP/1.1
 content-type: application/json
 
-{    
-    "username": "admin",
-    "password": "admin"
+{
+    "username": "qwe",
+    "password": "qwe"
 }
+### Seta o token
 @adminToken = {{loginAdmin.response.body.$.token}}
 
 ### Teste de buscar TODOS os chamados (admin)
@@ -83,6 +85,6 @@ POST http://localhost:40000/deleteChamado HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{adminToken}}
 
-{    
-    "id_chamado": 2
+{
+    "id_chamado": 2
 }
