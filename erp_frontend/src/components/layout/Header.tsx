@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-10 flex h-16 w-full items-center justify-between border-b border-border bg-card px-6">
       {/* Menu do Usuário */}
-      <div className="flex items-center gap-4">
+      <div className="ml-auto flex items-center gap-4">
         <details className="relative">
           <summary className="flex cursor-pointer items-center gap-2 rounded-lg p-2 hover:bg-background">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-primary">
@@ -18,7 +18,25 @@ export function Header() {
             </span>
           </summary>
           {/* Dropdown Menu */}
-          <div className="absolute right-0 top-11 w-48 rounded-lg border border-border bg-card p-2 shadow-lg">
+          <div className="absolute right-0 top-full mt-2 w-48 rounded-lg border border-border bg-card p-2 shadow-lg
+                       
+                       /* Seta (Borda) */
+                       before:absolute
+                       before:-top-2 before:right-4 /* Posição da seta */
+                       before:h-0 before:w-0
+                       before:border-b-[8px] before:border-l-[8px] before:border-r-[8px]
+                       before:border-b-border /* Cor da borda */
+                       before:border-l-transparent before:border-r-transparent
+
+                       /* Seta (Preenchimento) */
+                       after:absolute
+                       after:-top-[7px] after:right-[17px] /* Posição do preenchimento */
+                       after:h-0 after:w-0
+                       after:border-b-[7px] after:border-l-[7px] after:border-r-[7px]
+                       after:border-b-card /* Cor do fundo do card */
+                       after:border-l-transparent after:border-r-transparent
+                      "
+          >
             <Link
               href="/perfil"
               className="flex w-full items-center gap-2 rounded-md p-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
