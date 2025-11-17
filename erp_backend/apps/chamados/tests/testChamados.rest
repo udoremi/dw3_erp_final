@@ -1,0 +1,90 @@
+### Pega o token (usuário comum)
+# @name loginUser
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "user1",
+    "password": "mudar123"
+}
+### Seta o token
+@userToken = {{loginUser.response.body.$.token}}
+
+### Teste de inserção de chamado (logado como user1)
+POST http://localhost:40000/insertChamado HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+    "titulo": "Impressora não funciona",
+    "descricao": "A impressora do financeiro está offline.",
+    "categoria": "Hardware"
+}
+
+### Teste de inserção de outro chamado
+POST http://localhost:40000/insertChamado HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{userToken}}
+
+{
+    "titulo": "Sistema Lento",
+    "descricao": "O sistema de ERP está muito lento hoje.",
+    "categoria": "Software",
+    "prioridade": "Alta"
+}
+
+### Teste de buscar MEUS chamados (user1)
+GET http://localhost:40000/getMyChamados HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{userToken}}
+
+
+### Pega o token (admin)
+# @name loginAdmin
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "qwe",
+    "password": "qwe"
+}
+### Seta o token
+@adminToken = {{loginAdmin.response.body.$.token}}
+
+### Teste de buscar TODOS os chamados (admin)
+GET http://localhost:40000/getAllChamados HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+### Teste de buscar chamado por ID
+POST http://localhost:40000/getChamadoByID HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_chamado": 1
+}
+
+### Teste de atualizar chamado (fechando)
+POST http://localhost:40000/updateChamado HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_chamado": 1,
+    "titulo": "Impressora não funciona",
+    "descricao": "A impressora do financeiro está offline.",
+    "categoria": "Hardware",
+    "status": "Fechado",
+    "data_fechamento": "2025-11-15T12:00:00.000Z",
+    "prioridade": "Baixa"
+}
+
+### Teste de delete (hard) de chamado
+POST http://localhost:40000/deleteChamado HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_chamado": 2
+}

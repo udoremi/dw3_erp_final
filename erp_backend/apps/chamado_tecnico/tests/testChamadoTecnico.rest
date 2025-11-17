@@ -1,0 +1,49 @@
+### Pega o token (admin)
+# @name loginAdmin
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "qwe",
+    "password": "qwe"
+}
+### Seta o token
+@adminToken = {{loginAdmin.response.body.$.token}}
+
+### Atribuir o tecnico (ID 1) ao chamado (ID 1)
+POST http://localhost:40000/assignTecnico HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_chamado": 1,
+    "id_tecnico": 1
+}
+
+### Ver técnicos atribuídos ao chamado 1
+POST http://localhost:40000/getTecnicosByChamado HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_chamado": 1
+}
+
+### Ver chamados atribuídos ao tecnico 1
+POST http://localhost:40000/getChamadosByTecnico HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_tecnico": 1
+}
+
+### Desatribuir o tecnico (ID 1) do chamado (ID 1)
+POST http://localhost:40000/unassignTecnico HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+    "id_chamado": 1,
+    "id_tecnico": 1
+}

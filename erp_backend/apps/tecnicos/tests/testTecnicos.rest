@@ -1,0 +1,60 @@
+### Pega o token
+# @name loginAutenticado
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "qwe",
+    "password": "qwe"
+}
+### Seta o token
+@accessToken = {{loginAutenticado.response.body.$.token}}
+
+### Pega o ID de um usuário (que criamos como tecnico1)
+# @name loginTecnico
+POST http://localhost:40000/Login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "tecnico1",
+    "password": "mudar123"
+}
+### Seta o token
+@tecnicoUserID = {{loginTecnico.response.body.$.usuarioid}}
+
+### Teste de inserção de tecnico (vinculado ao usuario 'tecnico1')
+POST http://localhost:40000/insertTecnico HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "usuarioid": {{tecnicoUserID}},
+    "nome_completo": "Tecnico Um da Silva",
+    "email_contato": "tec1@email.com",
+    "especialidade": "Redes",
+    "nivel": "N2",
+    "ativo": true
+}
+
+### Teste de buscar todos os tecnicos
+GET http://localhost:40000/getAllTecnicos HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+### Teste de buscar tecnico por ID
+POST http://localhost:40000/getTecnicoByID HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "id_tecnico": 1
+}
+
+### Teste de delete (soft) de tecnico
+POST http://localhost:40000/deleteTecnico HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "id_tecnico": 1
+}
