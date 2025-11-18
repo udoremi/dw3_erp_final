@@ -15,7 +15,7 @@ import {
 
 type UserRole = 'padrao' | 'tecnico' | 'admin';
 const useAuth = () => {
-  const mockUserRole: UserRole = 'padrao'; // 'padrao', 'tecnico' ou 'admin'
+  const mockUserRole: UserRole = 'admin'; // 'padrao', 'tecnico' ou 'admin'
   return { role: mockUserRole };
 };
 
@@ -104,9 +104,15 @@ export function Sidebar() {
       {/* Navegação Dinâmica */}
       <nav className="flex flex-col gap-2 p-4">
         {linksToShow.map((link) => {
-          // Lógica para destacar o link ativo
-          const isActive = (link.href === '/' && pathname === '/') || 
-                           (link.href !== '/' && pathname.startsWith(link.href));
+          let isActive = false;
+
+          if (link.href === '/chamados') {
+            isActive = pathname.startsWith('/chamados') && 
+                       !pathname.startsWith('/chamados/minha-fila') && 
+                       !pathname.startsWith('/chamados/novo');
+          } else {
+            isActive = pathname.startsWith(link.href);
+          }
           
           return (
             <Link

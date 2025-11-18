@@ -13,14 +13,14 @@ export default function ChamadosPage() {
         </h1>
         
         {/* Este Link leva para a página de formulário, conforme regra do evandro (sem modal). */}
-        <Link href="/chamados/novo">
+        {/* <Link href="/chamados/novo">
           <Button>
             <span className="flex items-center gap-2">
               <Plus className="h-5 w-5" />
               Novo Chamado
             </span>
           </Button>
-        </Link>
+        </Link> */}
       </div>
 
       {/* Tabela */}
